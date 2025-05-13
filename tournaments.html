@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PerfectXSkills - Tournaments</title>
+  <link rel="stylesheet" href="tournament.css"/>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="WhatsApp Image 2025-04-24 at 09.40.06_1e8617be.jpg" alt="PerfectXSkills Logo" class="logo"/>
+    </div>
+    <h1>Tournaments</h1>
+    <nav>
+      <button onclick="window.location.href='myTournaments.html'" class="my-tournaments-button">My Tournaments</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="organize-tournament">
+      <h2>Organize a Tournament</h2>
+      <form id="organizeForm">
+        <div class="form-group">
+          <label for="tournamentName">Tournament Name</label>
+          <input type="text" id="tournamentName" name="tournamentName" required/>
+        </div>
+        <div class="form-group">
+          <label for="sportType">Sport Type</label>
+          <select id="sportType" name="sportType" required>
+            <option value="football">Football</option>
+            <option value="basketball">Basketball</option>
+            <option value="tennis">Tennis</option>
+            <option value="cricket">Cricket</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required/>
+        </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" required/>
+        </div>
+        <div class="form-group">
+          <label for="prizePool">Prize Pool</label>
+          <input type="number" id="prizePool" name="prizePool" required/>
+        </div>
+        <div class="form-group">
+          <label for="entryFee">Entry Fee</label>
+          <input type="number" id="entryFee" name="entryFee" required/>
+        </div>
+        <div class="form-group">
+          <label for="contact">Contact Details</label>
+          <input type="number" name="contact" id="contact">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        <button type="submit">Organize Tournament</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About PerfectXSkills</h3>
+        <p>PerfectXSkills is your ultimate platform to improve your skills, connect with like-minded individuals, and participate in exciting tournaments.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 PerfectXSkills. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('organizeForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const tournament = {
+        name: document.getElementById('tournamentName').value,
+        sport: document.getElementById('sportType').value,
+        date: document.getElementById('date').value,
+        location: document.getElementById('location').value,
+        prizePool: document.getElementById('prizePool').value,
+        entryFee: document.getElementById('entryFee').value,
+        description: document.getElementById('description').value,
+      };
+
+      let tournaments = JSON.parse(localStorage.getItem('tournaments')) || [];
+      tournaments.push(tournament);
+      localStorage.setItem('tournaments', JSON.stringify(tournaments));
+
+      alert('Tournament Organized Successfully!');
+      window.location.href = 'participate.html'; // Redirect to view tournaments
+    });
+  </script>
+</body>
+</html>

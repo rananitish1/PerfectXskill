@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Joined Tournaments</title>
+  <link rel="stylesheet" href="participate.css" />
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="WhatsApp Image 2025-04-24 at 09.40.06_1e8617be.jpg" alt="PerfectXSkills Logo" class="logo">
+    </div>
+    <h1>My Joined Tournaments</h1>
+  </header>
+
+  <main>
+    <section class="available-tournaments">
+      <div id="joinedList" class="tournament-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-bottom">
+      <p>&copy; 2025 PerfectXSkills. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function renderJoinedTournaments() {
+      const joined = JSON.parse(localStorage.getItem('joinedTournaments')) || [];
+      const joinedListDiv = document.getElementById('joinedList');
+      joinedListDiv.innerHTML = ''; // Clear previous content
+  
+      if (joined.length === 0) {
+        joinedListDiv.innerHTML = '<p>You haven\'t joined any tournaments yet.</p>';
+        return;
+      }
+  
+      joined.forEach((tournament, index) => {
+        const tournamentCard = document.createElement('div');
+        tournamentCard.classList.add('tournament-card');
+  
+        tournamentCard.innerHTML = `
+          <h3>${tournament.name}</h3>
+          <p><strong>Sport:</strong> ${tournament.sport}</p>
+          <p><strong>Date:</strong> ${tournament.date}</p>
+          <p><strong>Location:</strong> ${tournament.location}</p>
+          <p><strong>Prize Pool:</strong> ₹${tournament.prizePool}</p>
+          <p><strong>Entry Fee:</strong> ₹${tournament.entryFee}</p>
+          <p><strong>Description:</strong> ${tournament.description}</p>
+          <button class="leave-button" onclick="leaveTournament(${index})">Leave Tournament</button>
+        `;
+  
+        joinedListDiv.appendChild(tournamentCard);
+      });
+    }
+  
+    function leaveTournament(index) {
+      const joined = JSON.parse(localStorage.getItem('joinedTournaments')) || [];
+      const tournamentName = joined[index].name;
+  
+      if (confirm(`Are you sure you want to leave "${tournamentName}"?`)) {
+        joined.splice(index, 1); // Remove tournament
+        localStorage.setItem('joinedTournaments', JSON.stringify(joined));
+        renderJoinedTournaments(); // Re-render updated list
+        alert('❌ You have left the tournament.');
+      }
+    }
+  
+    // Run on page load
+    window.onload = renderJoinedTournaments;
+  </script>
+  
+</body>
+</html>

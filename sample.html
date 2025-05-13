@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PerfectXSkills – Video Notes</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #4dd0e1, #81c784); /* Gradient from screenshot */
+}
+
+
+header {
+  text-align: center;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0.7); /* Soft white background for contrast */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  height: 80px; /* Increased size */
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+  color: #004d40;
+  font-weight: bold;
+}
+
+
+    
+    .upload-form {
+      padding: 20px;
+      background-color: #e0f7fa;
+      text-align: center;
+    }
+
+    .upload-form input, .upload-form button {
+      margin: 8px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .upload-form button {
+      background-color: #00796b;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+    }
+
+    .upload-form button:hover {
+      background-color: #004d40;
+    }
+
+    .reel-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .reel {
+      position: relative;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .reel video {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .uploader-info {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(0,0,0,0.6);
+      padding: 8px 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .uploader-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #7e57c2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      margin-right: 8px;
+    }
+
+    .uploader-name {
+      font-size: 14px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="WhatsApp Image 2025-04-24 at 09.40.06_1e8617be.jpg" alt="PerfectXSkills Logo" class="logo">
+    <h1>Video Notes</h1>
+  </header>
+
+  <div class="upload-form">
+    <input type="file" id="videoUpload" accept="video/*" />
+    <input type="text" id="username" placeholder="Upload title" />
+    <button onclick="handleUpload()">Upload Video</button>
+  </div>
+
+  <div class="reel">
+    <video controls autoplay muted loop>
+      <source src="https://media.videezy.com/system/resources/previews/000/039/709/original/Tennis_Player_Hits_Ball.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="uploader-info">
+      <div class="uploader-avatar">T</div>
+      <div class="uploader-name">@TennisPro</div>
+    </div>
+  </div>
+  
+  <div class="reel">
+    <video controls autoplay muted loop>
+      <source src="https://media.videezy.com/system/resources/previews/000/033/358/original/Football_Goal_Slow_Motion.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="uploader-info">
+      <div class="uploader-avatar">F</div>
+      <div class="uploader-name">@GoalMaster</div>
+    </div>
+  </div>
+  
+  <div class="reel">
+    <video controls autoplay muted loop>
+      <source src="https://media.videezy.com/system/resources/previews/000/034/128/original/Gymnast_Backflip.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="uploader-info">
+      <div class="uploader-avatar">G</div>
+      <div class="uploader-name">@GymHero</div>
+    </div>
+  </div>
+  
+
+  <script>
+    function handleUpload() {
+      const videoInput = document.getElementById('videoUpload');
+      const username = document.getElementById('username').value || 'User';
+      const file = videoInput.files[0];
+      if (!file) return alert('Please select a video');
+
+      const videoURL = URL.createObjectURL(file);
+
+      const reel = document.createElement('div');
+      reel.className = 'reel';
+
+      const video = document.createElement('video');
+      video.src = videoURL;
+      video.controls = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+
+      const uploaderInfo = document.createElement('div');
+      uploaderInfo.className = 'uploader-info';
+
+      const avatar = document.createElement('div');
+      avatar.className = 'uploader-avatar';
+      avatar.innerText = username.charAt(0).toUpperCase();
+
+      const name = document.createElement('div');
+      name.className = 'uploader-name';
+      name.innerText = `@${username}`;
+
+      uploaderInfo.appendChild(avatar);
+      uploaderInfo.appendChild(name);
+
+      reel.appendChild(video);
+      reel.appendChild(uploaderInfo);
+
+      document.getElementById('reelContainer').prepend(reel);
+    }
+  </script>
+
+</body>
+</html>

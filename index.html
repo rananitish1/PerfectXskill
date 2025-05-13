@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerfectXSkills - Home</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="WhatsApp Image 2025-04-24 at 09.40.06_1e8617be.jpg" alt="PerfectXSkills Logo" class="logo">
+    </div>
+    <h1>Welcome to PerfectXSkills</h1>
+  </header>
+  <div class="profile-dropdown">
+    <div class="profile-avatar" onclick="toggleDropdown()">
+      <span>N</span>
+    </div>
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="settings.html">Settings</a>
+      <a href="edit-profile.html">Edit Profile</a>
+      <a href="your-videos.html">Your Videos</a>
+      <a href="signup-choice.html">Logout</a>
+    </div>
+  </div>
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById("dropdownMenu");
+      menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+    }
+  
+    // Optional: close the menu if you click elsewhere
+    window.addEventListener('click', function(e) {
+      const avatar = document.querySelector('.profile-avatar');
+      const menu = document.getElementById('dropdownMenu');
+      if (!avatar.contains(e.target) && !menu.contains(e.target)) {
+        menu.style.display = 'none';
+      }
+    });
+  </script>
+  
+  
+  
+
+  <main>
+    <div class="card" onclick="navigateTo('videonotes.html')">
+      <img src="Screenshot 2025-04-21 110259.png" alt="Video Notes Icon" class="icon">
+      <h2>Video Notes</h2>
+      <p>Record and improve your form</p>
+    </div>
+
+    <div class="card" onclick="navigateTo('tournaments.html')">
+      <img src="Screenshot 2025-04-21 111750.png" alt="Tournament Icon" class="icon">
+      <h2>Tournaments</h2>
+      <p>organize nearby events</p>
+    </div>
+
+    <div class="card" onclick="navigateTo('Participate.html')">
+      <img src="Screenshot 2025-04-21 112038.png" alt="Community Icon" class="icon">
+      <h2>Participate In a Tournament</h2>
+      <p>Connect with others</p>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About PerfectXSkills</h3>
+        <p id="description">
+          PerfectXSkills is your ultimate platform to improve your skills, connect with like-minded individuals, and participate in exciting tournaments. Whether you're an athlete, gamer, or fitness enthusiast, PerfectXSkills helps you track your progress, get feedback, and compete with others.
+        </p>
+        <button id="readMoreBtn">Read More</button>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 PerfectXSkills. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="index.js"></script>
+</body>
+</html> 

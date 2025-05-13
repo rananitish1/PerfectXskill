@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PerfectXSkills – Video Notes</title>
+  <link rel="stylesheet" href="index.css" />
+  <style>
+    .upload-form {
+      padding: 20px;
+      background-color: #e0f7fa;
+      text-align: center;
+    }
+
+    .reel-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-snap-type: y mandatory;
+      overflow-y: auto;
+      height: 80vh;
+      background: #f5f5f5;
+    }
+
+    .reel {
+      scroll-snap-align: start;
+      position: relative;
+      width: 100%;
+      max-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      margin-bottom: 20px;
+    }
+
+    .reel video {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+
+    .uploader-info {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.6);
+      padding: 8px 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .uploader-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #7e57c2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .uploader-name {
+      font-size: 14px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="WhatsApp Image 2025-04-24 at 09.40.06_1e8617be.jpg" alt="PerfectXSkills Logo" class="logo">
+    </div>
+    <h1>Video Notes</h1>
+  </header>
+
+  <div class="upload-form">
+    <input type="file" id="videoUpload" accept="video/*" />
+    <input type="text" id="username" placeholder="Upload title" />
+    <button onclick="handleUpload()">Upload Video</button>
+  </div>
+
+  <div class="reel-container" id="reelContainer">
+    <!-- Uploaded videos appear here -->
+  </div>
+
+  <script>
+    function handleUpload() {
+      const videoInput = document.getElementById('videoUpload');
+      const username = document.getElementById('username').value || 'User';
+      const file = videoInput.files[0];
+      if (!file) return alert('Please select a video');
+
+      const videoURL = URL.createObjectURL(file);
+
+      const reel = document.createElement('div');
+      reel.className = 'reel';
+
+      const video = document.createElement('video');
+      video.src = videoURL;
+      video.controls = true;
+      video.autoplay = true;
+      video.loop = true;
+      video.muted = true;
+
+      const uploaderInfo = document.createElement('div');
+      uploaderInfo.className = 'uploader-info';
+
+      const avatar = document.createElement('div');
+      avatar.className = 'uploader-avatar';
+      avatar.innerText = username.charAt(0).toUpperCase();
+
+      const name = document.createElement('div');
+      name.className = 'uploader-name';
+      name.innerText = `@${username}`;
+
+      uploaderInfo.appendChild(avatar);
+      uploaderInfo.appendChild(name);
+
+      reel.appendChild(video);
+      reel.appendChild(uploaderInfo);
+
+      document.getElementById('reelContainer').prepend(reel);
+    }
+  </script>
+
+</body>
+</html>

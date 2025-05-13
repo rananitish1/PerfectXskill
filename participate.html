@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerfectXSkills - Participate in Tournament</title>
+  <link rel="stylesheet" href="participate.css">
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="WhatsApp Image 2025-04-24 at 09.40.06_1e8617be.jpg" alt="PerfectXSkills Logo" class="logo">
+    </div>
+    <h1>Participate in Tournaments</h1>
+    <nav>
+      <button onclick="window.location.href='myTournament.html'" class="my-tournaments-button">My Tournaments</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="available-tournaments">
+      <h2>Available Tournaments</h2>
+      <div id="tournamentList" class="tournament-list">
+        <!-- Tournaments will be dynamically added here -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>About PerfectXSkills</h3>
+        <p>
+          PerfectXSkills is your ultimate platform to improve your skills, connect with like-minded individuals, and participate in exciting tournaments.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 PerfectXSkills. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    window.onload = function () {
+     const tournaments = JSON.parse(localStorage.getItem('tournaments')) || [];
+     const joinedTournaments = JSON.parse(localStorage.getItem('joinedTournaments')) || [];
+     const tournamentListDiv = document.getElementById('tournamentList');
+ 
+     // Filter out tournaments that have already been joined
+     const unjoinedTournaments = tournaments.filter(t => {
+       return !joinedTournaments.some(jt => jt.name === t.name && jt.date === t.date);
+     });
+ 
+     if (unjoinedTournaments.length === 0) {
+       tournamentListDiv.innerHTML = '<p>No available tournaments to join.</p>';
+       return;
+     }
+ 
+     unjoinedTournaments.forEach((tournament, index) => {
+       const tournamentCard = document.createElement('div');
+       tournamentCard.classList.add('tournament-card');
+ 
+       tournamentCard.innerHTML = `
+         <h3>${tournament.name}</h3>
+         <p><strong>Sport:</strong> ${tournament.sport}</p>
+         <p><strong>Date:</strong> ${tournament.date}</p>
+         <p><strong>Location:</strong> ${tournament.location}</p>
+         <p><strong>Prize Pool:</strong> ₹${tournament.prizePool}</p>
+         <p><strong>Entry Fee:</strong> ₹${tournament.entryFee}</p>
+         <p><strong>Description:</strong> ${tournament.description}</p>
+         <button class="join-button" onclick="joinTournament(${index})">Join Tournament</button>
+       `;
+ 
+       tournamentListDiv.appendChild(tournamentCard);
+     });
+   };
+ 
+   function joinTournament(index) {
+     const tournaments = JSON.parse(localStorage.getItem('tournaments')) || [];
+     const joined = JSON.parse(localStorage.getItem('joinedTournaments')) || [];
+ 
+     // Find unjoined tournaments again to match current display
+     const unjoinedTournaments = tournaments.filter(t => {
+       return !joined.some(jt => jt.name === t.name && jt.date === t.date);
+     });
+ 
+     const selectedTournament = unjoinedTournaments[index];
+     const answer = prompt("Do you meet the tournament requirements? (Yes/No)");
+ 
+     if (answer && answer.toLowerCase() === 'yes') {
+       joined.push(selectedTournament);
+       localStorage.setItem('joinedTournaments', JSON.stringify(joined));
+ 
+       alert('✅ You have successfully joined the tournament!');
+       window.location.reload(); // Refresh to remove the joined tournament
+     } else {
+       alert('❌ You do not meet the requirements to join this tournament.');
+     }
+   }
+ </script>
+</body>
+</html>
