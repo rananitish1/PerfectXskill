@@ -1,8 +1,16 @@
 function navigateTo(page) {
     window.location.href = page;
   }
+document.addEventListener("DOMContentLoaded", function () {
+  const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  const initialSpan = document.getElementById('userInitial');
+
+  if (currentUser && currentUser.username) {
+    const firstLetter = currentUser.username.charAt(0).toUpperCase();
+    initialSpan.innerText = firstLetter;
+  }
   
-  document.addEventListener("DOMContentLoaded", function () {
+  
     const description = document.getElementById("description");
     const readMoreBtn = document.getElementById("readMoreBtn");
     const fullText = description.innerText;
