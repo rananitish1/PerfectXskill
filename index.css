@@ -1,3 +1,4 @@
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -158,14 +159,15 @@ button:hover {
   border-radius: 5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
-
 .sidebar {
   position: fixed;
   top: 0;
   left: -250px;
   height: 100%;
   width: 250px;
-  background-color: #ffffff;
+background-color: #008080;
+
+
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   padding-top: 60px;
   transition: left 0.3s ease;
@@ -173,21 +175,30 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: start;
-}
-
-.sidebar.open {
-  left: 0;
+  box-sizing: border-box; /* important to keep content inside */
+  overflow-x: hidden; /* prevents horizontal scroll */
 }
 
 .sidebar a {
   padding: 15px 20px;
   text-decoration: none;
-  color: #333;
+  color: #ffffff; /* white text */
   font-size: 18px;
   width: 100%;
+  box-sizing: border-box;
   transition: background-color 0.2s;
 }
 
 .sidebar a:hover {
-  background-color: #f0f0f0;
+  background-color: #a39a9a; /* dark gray hover */
 }
+.sidebar {
+  left: -250px; /* hidden by default */
+  /* other styles */
+}
+
+.sidebar.open {
+  left: 0; /* show when open */
+}
+
+
